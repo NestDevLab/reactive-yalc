@@ -3,7 +3,7 @@ import type {
   CampaignLandingContent,
   LocaleOption,
   MarketingLandingContent,
-} from './types';
+} from './types.js';
 
 const linkTargetProps = (action: ActionLink) =>
   action.external
