@@ -30,8 +30,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "npm": ">=11"
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": ">=11",
+      "onFail": "error"
+    }
   },
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",

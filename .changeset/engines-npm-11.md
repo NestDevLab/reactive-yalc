@@ -2,4 +2,4 @@
 "@reactive-yalc/ui": patch
 ---
 
-Declare `npm >= 11` in `engines`, matching the npm version that trusted publishing requires.
+Require npm >= 11 for development on this repository through `devEngines`. Installing the published package is unaffected.
