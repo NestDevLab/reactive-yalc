@@ -1,0 +1,70 @@
+name: Publish npm package
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to npm after validation (false = dry run only)"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run ci:checks
+      - name: Validate npm publish metadata
+        run: npm publish --dry-run --access public
+
+  publish:
+    name: Publish to npm
+    if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && inputs.publish)
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Configure npm token fallback
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [[ -n "$NPM_TOKEN" ]]; then
+            npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          fi
+      - name: Publish unless this version already exists
+        run: |
+          name=$(node -p "require('./package.json').name")
+          version=$(node -p "require('./package.json').version")
+          if npm view "${name}@${version}" version >/dev/null 2>&1; then
+            echo "${name}@${version} is already published; skipping."
+            exit 0
+          fi
+          npm publish --provenance --access public

@@ -5,11 +5,11 @@ export type {
   LocaleOption,
   MarketingLandingContent,
   RewardContent,
-} from './types';
+} from './types.js';
 
 export {
   CampaignLanding,
   LocaleSwitcher,
   MarketingLanding,
   SiteHeader,
-} from './components';
+} from './components.js';
