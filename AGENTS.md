@@ -10,4 +10,6 @@
   cannot satisfy it. Resolve every review conversation before merging.
 - This is a public repository: no customer names, hosts, ticket numbers or local paths in code,
   pull requests or commits.
-- Publishing happens only from a GitHub release or a manual `npm-publish` run with `publish: true`.
+- A push to `main` runs Changesets in `npm-publish.yml`: pending changesets update the version PR;
+  merging that PR publishes unpublished versions through npm OIDC with provenance, tags and GitHub
+  releases. Manual runs with `publish: true` use the same process on `main`.

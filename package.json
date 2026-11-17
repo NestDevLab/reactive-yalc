@@ -44,7 +44,8 @@
     "ci:checks": "npm run typecheck && npm run build && npm pack --dry-run",
     "changeset": "changeset",
     "version:packages": "changeset version && npm install --package-lock-only --ignore-scripts",
-    "prepublishOnly": "npm run ci:checks"
+    "prepublishOnly": "npm run ci:checks",
+    "release": "npm run build && changeset publish"
   },
   "peerDependencies": {
     "react": "^19.1.0"

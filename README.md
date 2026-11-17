@@ -32,8 +32,18 @@ npm run ci:checks   # typecheck, build to dist/, npm pack --dry-run
 npm run changeset   # describe a user-visible change
 ```
 
-Releases use changesets: merging to `main` opens a version PR, and a GitHub release (or a manual
-publish workflow run) publishes to npm with provenance.
+Releases use Changesets through `.github/workflows/npm-publish.yml`. A push to `main` with
+pending changesets creates or updates the version PR. Merging that PR publishes package versions
+that are missing from npm, pushes their Git tags, and creates GitHub releases from the changelog.
+Already published versions are skipped.
+
+Publishing uses npm trusted publishing (OIDC) with provenance from the GitHub-hosted runner in
+the `npm` environment. The npm Trusted Publisher must match this repository, the workflow filename
+`npm-publish.yml`, and the `npm` environment. Node 24 supplies npm >= 11.5.1, which the workflow
+checks before running Changesets.
+
+Pull requests and manual workflow runs with `publish: false` validate the package. A manual run
+with `publish: true` on `main` runs the same version-or-publish process as a push to `main`.
 
 ## License
 
