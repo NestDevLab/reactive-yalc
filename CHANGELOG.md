@@ -1,5 +1,11 @@
 # @reactive-yalc/ui
 
+## 0.2.1
+
+### Patch Changes
+
+- 4db959e: Require npm >= 11 for development on this repository through `devEngines`. Installing the published package is unaffected.
+
 ## 0.2.0
 
 ### Minor Changes
