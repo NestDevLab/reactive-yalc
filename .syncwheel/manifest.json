@@ -27,5 +27,7 @@
       "backup_keep": 2
     },
     "claims": "advisory"
-  }
+  },
+  "repository_mode": "delivery",
+  "channels": []
 }
