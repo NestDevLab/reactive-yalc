@@ -1,5 +1,11 @@
 # @reactive-yalc/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 517d0f5: Add a responsive, brandable conversation surface and message component with application-owned header, composer, status, actions and keyboard slots.
+
 ## 0.2.1
 
 ### Patch Changes
