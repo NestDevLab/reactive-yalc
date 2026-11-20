@@ -1,15 +1,17 @@
 {
   "changed_refs": {
-    "refs/heads/main-integration": "8dd2b329f6253f37db963a98876c7c761ab40057"
+    "refs/heads/pr/conversation-surface": "2175b255bc3c3950e896818a5409ae145a2db305"
   },
   "claims": {
-    "refs/heads/main-integration": "62bebd812807c25c6dac258e186d7fa607a118fc"
+    "refs/heads/main-integration": "62bebd812807c25c6dac258e186d7fa607a118fc",
+    "refs/heads/pr/conversation-surface": "c809d631b10e7beec0703e13947390054017d7d8"
   },
   "coordination_id": "default",
-  "created_at": "2026-11-17T17:11:47+00:00",
+  "created_at": "2026-11-20T04:48:38+00:00",
   "installation_id": "e83434d1-e09b-4dd1-8bdf-a5f7970573c6",
   "managed_refs": {
-    "refs/heads/main-integration": "8dd2b329f6253f37db963a98876c7c761ab40057"
+    "refs/heads/main-integration": "8dd2b329f6253f37db963a98876c7c761ab40057",
+    "refs/heads/pr/conversation-surface": "2175b255bc3c3950e896818a5409ae145a2db305"
   },
   "manifest": {
     "coordination": {
@@ -37,19 +39,36 @@
         "role": "canonical"
       },
       "branch": "main-integration",
-      "stacks": [],
+      "stacks": [
+        "conversation-surface"
+      ],
       "strategy": "cherry-pick"
     },
-    "stacks": [],
+    "stacks": [
+      {
+        "base": {
+          "kind": "remote-ref",
+          "ref": "refs/heads/main",
+          "role": "canonical"
+        },
+        "branch": "pr/conversation-surface",
+        "commits": [
+          "a388c6cdda0903d67c77eb8adc9fcf5a2f856987"
+        ],
+        "id": "conversation-surface",
+        "integration_branch": "main-integration",
+        "target_branch": "main"
+      }
+    ],
     "version": 2
   },
   "manifest_digest": "3c12729fad35569535888e7113e63f59e2e544c6c88707f58039a0febf8b0486",
-  "operation_token": "efaf2c43-ad6b-4247-8d74-aae70f52b029",
-  "parent_state": null,
+  "operation_token": "c2624a3e-2264-4bb3-bee5-f8e317c3e039",
+  "parent_state": "c66a3d8ab979555a18f0807942277badeb69fe05",
   "projection_status": "partial",
-  "publication_id": "0f909ab3-9ec9-431f-9be8-7057e2e3bc8c",
-  "publication_scope": "integration",
+  "publication_id": "30b53d78-a8f5-437d-9e92-97fc2d96f0cd",
+  "publication_scope": "stack:conversation-surface",
   "schema_version": 2,
-  "syncwheel_version": "0.47.27",
+  "syncwheel_version": "0.47.28",
   "tombstones": []
 }
