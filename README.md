@@ -18,6 +18,61 @@ import { SiteHeader } from '@reactive-yalc/ui';
 import '@reactive-yalc/ui/styles.css';
 ```
 
+## Conversation surfaces
+
+`ConversationSurface` provides a rounded panel with a fixed header, keyboard-scrollable
+transcript and optional status, actions, composer and keyboard slots. `ConversationMessage`
+provides optional metadata and actions with logical `start` / `end` alignment for RTL support.
+Both accept standard HTML attributes, including `dir`, `style` and event handlers.
+
+```tsx
+import { ConversationMessage, ConversationSurface } from '@reactive-yalc/ui';
+import '@reactive-yalc/ui/styles.css';
+
+<ConversationSurface
+  label="Assistant"
+  transcriptLabel="Conversation history"
+  header={<h1>How can we help?</h1>}
+  status={<span role="status">Ready</span>}
+  composer={
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="message">Your message</label>
+      <input id="message" name="message" />
+      <button type="submit">Send</button>
+    </form>
+  }
+  actions={suggestedActions}
+  keyboard={virtualKeyboard}
+>
+  <ConversationMessage metadata="Assistant">Welcome.</ConversationMessage>
+  <ConversationMessage metadata="You" alignment="end">Hello.</ConversationMessage>
+</ConversationSurface>
+```
+
+All visible content is application-owned. The application supplies message identity/keys,
+input state, submission, disabled controls, product actions, keyboard behavior and focus,
+scroll position and a concise live region. The transcript is deliberately a named region,
+not an automatic live log: streaming updates and rich interactive content should not cause
+repeated announcements of the whole history. Set `busy` while transcript content is updating;
+announce a useful final update through the status slot. No automatic scrolling or focus
+movement is performed.
+
+The default height is `min(48rem, 100dvh)`. Set `--ryl-conversation-height` to suit a viewport
+or a bounded flex/grid parent. Large custom keyboard/composer slots must leave usable space
+for the transcript; applications own responsive keyboard sizing and safe-area insets.
+
+Brand through existing `--ryl-surface`, `--ryl-text`, `--ryl-border`, `--ryl-muted` and
+`--ryl-focus` tokens, plus these optional overrides:
+
+| Tokens | Purpose |
+| --- | --- |
+| `--ryl-conversation-width`, `--ryl-conversation-height` | Panel bounds |
+| `--ryl-conversation-radius`, `--ryl-conversation-padding`, `--ryl-conversation-gap` | Panel shape and spacing |
+| `--ryl-conversation-background`, `--ryl-font-family` | Transcript and typography |
+| `--ryl-message-width`, `--ryl-message-radius`, `--ryl-message-padding` | Message bounds and spacing |
+| `--ryl-message-background`, `--ryl-message-text` | Start-aligned messages |
+| `--ryl-message-end-background`, `--ryl-message-end-text` | End-aligned messages |
+
 ## Boundaries
 
 - Put reusable components here, abstracted and generalized as much as possible.
@@ -28,7 +83,7 @@ import '@reactive-yalc/ui/styles.css';
 
 ```bash
 npm ci
-npm run ci:checks   # typecheck, build to dist/, npm pack --dry-run
+npm run ci:checks   # typecheck, build, component contract tests, npm pack --dry-run
 npm run changeset   # describe a user-visible change
 ```
 
