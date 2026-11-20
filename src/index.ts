@@ -13,3 +13,6 @@ export {
   MarketingLanding,
   SiteHeader,
 } from './components.js';
+
+export { ConversationMessage, ConversationSurface } from './conversation.js';
+export type { ConversationMessageProps, ConversationSurfaceProps } from './conversation.js';
