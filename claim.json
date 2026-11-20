@@ -1,0 +1,11 @@
+{
+  "changed_refs": [
+    "refs/heads/pr/conversation-surface"
+  ],
+  "claimed_at": "2026-11-20T04:48:38+00:00",
+  "coordination_id": "default",
+  "operation_token": "c2624a3e-2264-4bb3-bee5-f8e317c3e039",
+  "publication_scope": "stack:conversation-surface",
+  "source_ref": "refs/heads/pr/conversation-surface",
+  "syncwheel_version": "0.47.28"
+}
